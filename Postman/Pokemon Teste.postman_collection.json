@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "8c0d3e8e-8642-442e-8bef-c225a399b571",
+		"name": "Pokemon Teste",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49962940",
+		"_collection_link": "https://murilo-figueiredo-2898f8e9-950245.postman.co/workspace/181a7ea3-a97b-413c-85d3-2b25dc275465/collection/49962940-8c0d3e8e-8642-442e-8bef-c225a399b571?action=share&source=collection_link&creator=49962940"
+	},
+	"item": [
+		{
+			"name": "Pokemon encontrado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/tepig",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"tepig"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pokemon não encontrado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/inexistente",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"inexistente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pokemon erro url",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/digimon/",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"digimon",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
