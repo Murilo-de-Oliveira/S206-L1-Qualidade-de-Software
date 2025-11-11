@@ -1,12 +1,15 @@
 {
   "dependencies": {
-    "cypress": "^15.5.0",
-    "cypress-mochawesome-reporter": "^4.0.2"
+    "cypress": "^15.5.0"
   },
   "scripts": {
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "test": "cypress run",
+    "test:lista1": "cypress run --spec 'cypress/e2e/lista-1/**/*.cy.js'",
+    "report": "npx mochawesome-merge reports/*.json > reports/report.json && npx mochawesome-report-generator reports/report.json"
   },
   "devDependencies": {
+    "cypress-mochawesome-reporter": "^4.0.2",
     "mochawesome": "^7.1.4",
     "mochawesome-merge": "^5.0.0",
     "mochawesome-report-generator": "^6.3.2"
