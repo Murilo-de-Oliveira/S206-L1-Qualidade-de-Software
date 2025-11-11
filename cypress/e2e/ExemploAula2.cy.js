@@ -29,6 +29,15 @@ describe("Teste de criação, registro e login", () => {
     cy.get(".btn-primary").click()
     cy.get(".ng-binding").should("contain.text", infos[0])
   })
+
+  it("Delete do user com sucesso", () => {
+    let infos = criarUser()
+    cy.login(infos[0], infos[1])
+    cy.get(".ng-binding > a").click()
+    cy.get(".btn")
+    cy.login(infos[0], infos[1])
+    cy.get(".ng-binding").should("have.text", "Username or password is incorrect")
+  })
 })
 
 function criarUser(){
