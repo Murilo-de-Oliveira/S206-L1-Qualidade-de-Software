@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "37b57890-77ba-4ca1-ae2e-719110b69999",
+		"name": "Prova - Teste de API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49962940",
+		"_collection_link": "https://murilo-figueiredo-2898f8e9-950245.postman.co/workspace/Murilo's-Workspace~181a7ea3-a97b-413c-85d3-2b25dc275465/collection/49962940-37b57890-77ba-4ca1-ae2e-719110b69999?action=share&source=collection_link&creator=49962940"
+	},
+	"item": [
+		{
+			"name": "pokemon/{id} - Validando retorno do pokemon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno possui nome 'pikachu'\", function () {\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json.name).to.eql(\"pikachu\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Campos essenciais existem\", function () {\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json).to.have.property(\"abilities\");\r",
+							"    pm.expect(json).to.have.property(\"stats\");\r",
+							"    pm.expect(json).to.have.property(\"types\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}pokemon/{{pokemonId}}",
+					"host": [
+						"{{BaseUrl}}pokemon"
+					],
+					"path": [
+						"{{pokemonId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pokemon/{id} – Pokémon inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code é 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensagem de erro é coerente\", function () {\r",
+							"    const text = pm.response.text();\r",
+							"    pm.expect(text).to.include(\"Not Found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}pokemon/9999",
+					"host": [
+						"{{BaseUrl}}pokemon"
+					],
+					"path": [
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pokemon – Paginação",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+							"\r",
+							"pm.test(\"Retorna 10 itens\", () => {\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json.results.length).to.eql(10);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}pokemon?limit=10&offset=20",
+					"host": [
+						"{{BaseUrl}}pokemon"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pokemon/1 – Validar headers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+							"pm.test(\"Server apresenta headers de conteúdo\", () => {\r",
+							"    pm.expect(pm.response.headers.has(\"content-type\")).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/pokemon/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"pokemon",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "type/{id} – Validar headers de um recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorna header de content-type\", function () {\r",
+							"    pm.expect(pm.response.headers.has(\"content-type\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Nenhum corpo foi retornado (HEAD não tem body)\", function () {\r",
+							"    pm.expect(pm.response.text()).to.eql(\"\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"murilomon\",\r\n  \"type\": \"electric\",\r\n  \"level\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/type/3",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"type",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

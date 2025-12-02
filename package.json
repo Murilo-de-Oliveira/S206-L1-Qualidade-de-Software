@@ -1,11 +1,14 @@
 {
   "dependencies": {
-    "cypress": "^15.5.0"
+    "cypress": "^15.5.0",
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
   },
   "scripts": {
     "cypress:open": "cypress open",
     "test": "cypress run",
     "test:lista1": "cypress run --spec 'cypress/e2e/lista-1/**/*.cy.js'",
+    "test:prova": "cypress run --spec 'cypress/e2e/prova/**/*.cy.js'",
     "report": "npx mochawesome-merge reports/*.json > reports/report.json && npx mochawesome-report-generator reports/report.json"
   },
   "devDependencies": {
