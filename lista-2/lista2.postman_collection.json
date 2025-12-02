@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "394d0fbe-066c-460b-b32c-a8687112081e",
+		"name": "lista2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49962940",
+		"_collection_link": "https://murilo-figueiredo-2898f8e9-950245.postman.co/workspace/Murilo's-Workspace~181a7ea3-a97b-413c-85d3-2b25dc275465/collection/49962940-394d0fbe-066c-460b-b32c-a8687112081e?action=share&source=collection_link&creator=49962940"
+	},
+	"item": [
+		{
+			"name": "posts/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status é 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno possui userId, id, title e body\", () => {\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json).to.have.property(\"userId\");\r",
+							"    pm.expect(json).to.have.property(\"id\");\r",
+							"    pm.expect(json).to.have.property(\"title\");\r",
+							"    pm.expect(json).to.have.property(\"body\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}posts/{{postId}}",
+					"host": [
+						"{{baseUrl}}posts"
+					],
+					"path": [
+						"{{postId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status é 200\", () => pm.response.to.have.status(200));\r",
+							"\r",
+							"pm.test(\"Retorna array com 100 itens\", () => {\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json.length).to.eql(100);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}posts",
+					"host": [
+						"{{baseUrl}}posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "posts/99999",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status é 404\", () => pm.response.to.have.status(404));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}posts/99999",
+					"host": [
+						"{{baseUrl}}posts"
+					],
+					"path": [
+						"99999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status é 201\", () => pm.response.to.have.status(201));\r",
+							"\r",
+							"pm.test(\"Retorno contém os campos enviados\", () => {\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json.title).to.eql(\"meu post\");\r",
+							"    pm.expect(json.userId).to.eql(10);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"meu post\",\r\n  \"body\": \"conteúdo de teste\",\r\n  \"userId\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}posts",
+					"host": [
+						"{{baseUrl}}posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "posts/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status é 200\", () => pm.response.to.have.status(200));\r",
+							"\r",
+							"pm.test(\"Retorno contém nova estrutura\", () => {\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json.title).to.eql(\"novo título\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"title\": \"novo título\",\r\n  \"body\": \"novo texto\",\r\n  \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}posts/{{postId}}",
+					"host": [
+						"{{baseUrl}}posts"
+					],
+					"path": [
+						"{{postId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "posts/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"API não deveria retornar 200 para exclusão de ID inexistente\", () => {\r",
+							"    pm.expect(pm.response.code).to.not.eql(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}posts/99999",
+					"host": [
+						"{{baseUrl}}posts"
+					],
+					"path": [
+						"99999"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
