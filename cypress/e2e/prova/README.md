@@ -1,4 +1,4 @@
-# Testes de UI com Cypress – Projeto Lista 1
+# Testes de UI com Cypress – Prova
 
 Esta atividade implementa testes para o site [https://www.saucedemo.com/](https://www.saucedemo.com/).
 
@@ -22,7 +22,7 @@ npx cypress open
 npm test
 ```
 
-### Rodar apenas os testes da pasta "lista-1"
+### Rodar apenas os testes da pasta "prova"
 
 ```bash
 npm run test:prova
