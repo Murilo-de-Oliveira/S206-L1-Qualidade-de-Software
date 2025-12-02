@@ -43,3 +43,5 @@ Saída:
 ```
 reports/
 ```
+
+O relatório correto se encontra em: S206-L1-Qualidade-de-Software/reports/index_008.html
